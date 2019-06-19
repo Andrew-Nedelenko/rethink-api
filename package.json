@@ -1,0 +1,30 @@
+{
+  "name": "rethink-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Synacten/rethink-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Synacten/rethink-api/issues"
+  },
+  "homepage": "https://github.com/Synacten/rethink-api#readme",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.3",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "dotenv": "^8.0.0",
+    "koa": "^2.7.0"
+  }
+}
