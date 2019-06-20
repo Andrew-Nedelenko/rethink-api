@@ -3,7 +3,7 @@ const { User } = require('../model/Schema');
 
 const router = new Router();
 
-router.get('/', async (ctx) => {
+router.get('/users', async (ctx) => {
   const data = await User.findAll();
   ctx.body = data;
 });
