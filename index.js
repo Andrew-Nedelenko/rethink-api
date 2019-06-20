@@ -2,7 +2,8 @@ const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 const { customLogger } = require('./logs/logger');
 const { router } = require('./routes/routes');
-const { url, port } = require('./utils/config');
+const { evrt: { port, url } } = require('./utils/config');
+require('./model/Schema');
 
 const app = new Koa();
 

@@ -4,7 +4,13 @@ const path = require('path');
 const root = path.join.bind(this, __dirname, '../');
 dotenv.config({ path: root('.env') });
 
-const url = process.env.URL;
-const port = process.env.PORT;
+const evrt = {
+  url: process.env.URL,
+  port: process.env.PORT,
+  dbname: process.env.DBNAME,
+  dbuser: process.env.DBUSER,
+  dbpass: process.env.DBPASS,
+  dbhost: process.env.DBHOST,
+};
 
-module.exports = { url, port };
+module.exports = { evrt };

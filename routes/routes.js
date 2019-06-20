@@ -1,9 +1,11 @@
 const Router = require('koa-router');
+const { User } = require('../model/Schema');
 
 const router = new Router();
 
 router.get('/', async (ctx) => {
-  ctx.body = 'root route';
+  const data = await User.findAll();
+  ctx.body = data;
 });
 
 module.exports = { router };
