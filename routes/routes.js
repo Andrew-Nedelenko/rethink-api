@@ -3,7 +3,7 @@ const Router = require('koa-router');
 const router = new Router();
 
 router.get('/', async (ctx) => {
-  ctx.body = 'hello';
+  ctx.body = 'root route';
 });
 
 module.exports = { router };
