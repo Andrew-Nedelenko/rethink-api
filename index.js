@@ -1,10 +1,15 @@
 const Koa = require('koa');
-require('dotenv').config();
+const bodyParser = require('koa-bodyparser');
+const { customLogger } = require('./logs/logger');
+const { router } = require('./routes/routes');
+const { url, port } = require('./utils/config');
 
 const app = new Koa();
 
-app.use((ctx) => {
-  ctx.body = 'it works';
-});
+customLogger(app);
 
-app.listen(process.env.PORT || 2600, () => console.log(`Starting on ${process.env.PORT}`));
+app.use(bodyParser())
+  .use(router.routes())
+  .use(router.allowedMethods());
+
+app.listen(port, url);
