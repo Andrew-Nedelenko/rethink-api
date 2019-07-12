@@ -3,7 +3,7 @@ const bodyParser = require('koa-bodyparser');
 const { customLogger } = require('./logs/logger');
 const { router } = require('./routes/routes');
 const { evrt: { port, url } } = require('./utils/config');
-require('./model/Schema');
+require('./database/connect');
 
 const app = new Koa();
 
@@ -13,4 +13,4 @@ app.use(bodyParser())
   .use(router.routes())
   .use(router.allowedMethods());
 
-app.listen(port, url);
+app.listen(port, url, () => console.log(`listen on http://${url}:${port}`));

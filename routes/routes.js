@@ -1,11 +1,10 @@
 const Router = require('koa-router');
-const { User } = require('../model/Schema');
+const { getCategory, addCategory } = require('../controllers/cathegory');
 
 const router = new Router();
 
-router.get('/users', async (ctx) => {
-  const data = await User.findAll();
-  ctx.body = data;
-});
+router.get('/cathegory', getCategory);
+
+router.post('/addcathegory', addCategory);
 
 module.exports = { router };
