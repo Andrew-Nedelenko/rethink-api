@@ -12,4 +12,15 @@ const addCategory = async (ctx) => {
   ctx.status = 200;
 };
 
-module.exports = { getCategory, addCategory };
+const deleteCategory = async (ctx) => {
+  const { id } = ctx.request.body;
+  try {
+    await db.query(`DELETE FROM cathegory WHERE id = ${id}`);
+    ctx.status = 200;
+  } catch (e) {
+    ctx.status = 403;
+    throw new Error(e);
+  }
+};
+
+module.exports = { getCategory, addCategory, deleteCategory };
