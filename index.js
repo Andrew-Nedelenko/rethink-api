@@ -1,18 +1,13 @@
-const Koa = require('koa');
-const bodyParser = require('koa-bodyparser');
-const cors = require('@koa/cors');
-const { customLogger } = require('./logs/logger');
-const { router } = require('./routes/routes');
+const express = require('express');
 const { evrt: { port, url } } = require('./utils/config');
-require('./database/connect');
+const { customLogger } = require('./logs/logger');
 
-const app = new Koa();
+const app = express();
 
-customLogger(app);
+app.use(customLogger);
 
-app.use(bodyParser())
-  .use(cors())
-  .use(router.routes())
-  .use(router.allowedMethods());
+app.use('/', async (req, res) => {
+  res.status(200).send({ hello: 'world' });
+});
 
 app.listen(port, url, () => console.log(`listen on http://${url}:${port}`));
