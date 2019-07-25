@@ -1,45 +1,41 @@
 const { db } = require('../database/connect');
 
-const getCategory = async (ctx) => {
+const getCategory = async (req, res) => {
   const { rows } = await db.query('SELECT * FROM cathegory ORDER BY id ASC');
-  ctx.body = rows;
+  res.status(200).send(rows);
 };
 
-const addCategory = async (ctx) => {
-  const { cathegory } = ctx.request.body;
-  await db.query(`INSERT INTO cathegory (cathegory) VALUES ('${cathegory}')`);
-  ctx.status = 200;
-};
-
-const updateCategory = async (ctx) => {
-  const { id, cathegory } = ctx.request.body;
-  const probe = await db.query(`UPDATE cathegory SET cathegory = '${cathegory}' WHERE id = ${id}`);
-  if (probe.rowCount > 0) {
-    ctx.body = {
-      status: 200,
-      message: `cathegory ${cathegory} updated!`,
-    };
-  } else {
-    ctx.body = {
-      status: 403,
-      message: `cathegory id ${id} is not found`,
-    };
+const addCategory = async (req, res) => {
+  const { cathegory } = req.body;
+  try {
+    const create = await db.query(`INSERT INTO cathegory (cathegory) VALUES ('${cathegory}')`);
+    res.status(200).send(create);
+  } catch (e) {
+    res.status(409).send({ cathegory, msg: `${cathegory} alredy exist` });
   }
 };
 
-const deleteCategory = async (ctx) => {
-  const { id } = ctx.request.body;
+const updateCategory = async (req, res) => {
+  const { id, cathegory } = req.body;
+  const probe = await db.query(`UPDATE cathegory SET cathegory = '${cathegory}' WHERE id = ${id}`);
+  if (probe.rowCount > 0) {
+    res.status(200).send({ message: `cathegory ${cathegory} updated!` });
+  } else {
+    res.status(403).send({ message: `cathegory id ${id} is not found` });
+  }
+};
+
+const deleteCategory = async (req, res) => {
+  const { id } = req.body;
   const probe = await db.query(`DELETE FROM cathegory WHERE id = ${id}`);
   if (probe.rowCount > 0) {
-    ctx.body = {
-      status: 200,
+    res.status(200).send({
       message: `category ${id} has been deleted`,
-    };
+    });
   } else {
-    ctx.body = {
-      status: 403,
+    res.status(403).send({
       message: `id ${id} not found`,
-    };
+    });
   }
 };
 
