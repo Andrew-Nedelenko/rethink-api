@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const bodyParser = require('body-parser');
 const {
   getCategory, addCategory,
   updateCategory, deleteCategory,
@@ -12,14 +13,14 @@ const {
 const router = Router();
 
 router.get('/cathegory', getCategory);
-router.post('/addcathegory', addCategory);
-router.post('/updatecathegory', updateCategory);
-router.post('/deletecathegory', deleteCategory);
+router.post('/addcathegory', bodyParser.json(), addCategory);
+router.patch('/updatecathegory', bodyParser.json(), updateCategory);
+router.delete('/deletecathegory/:id', deleteCategory);
 
 router.get('/articles', getArticles);
 router.get('/article/:id', getOneArticle);
-router.post('/addarticle', addArticle);
-router.post('/updatearticle', updateArticle);
+router.post('/addarticle', bodyParser.json(), addArticle);
+router.patch('/updatearticle', bodyParser.json(), updateArticle);
 router.delete('/deletearticle/:id', deleteArticle);
 
 

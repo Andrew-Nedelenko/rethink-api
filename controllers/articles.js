@@ -9,8 +9,7 @@ const getArticles = async (req, res) => {
       res.send({ msg: 'no articles yet' });
     }
   } catch (e) {
-    res.status(400);
-    throw new Error(e);
+    res.status(400).send({ msg: 'something wrong' });
   }
 };
 
@@ -24,8 +23,7 @@ const getOneArticle = async (req, res) => {
       res.status(400).send({ msg: `no article with id ${id}` });
     }
   } catch (e) {
-    res.status(400);
-    throw new Error(e);
+    res.status(400).send({ msg: 'something wrong' });
   }
 };
 
@@ -35,7 +33,7 @@ const addArticle = async (req, res) => {
     await db.query(`INSERT INTO articles (title, description, cathegory) VALUES ('${title}', '${description}', '${cathegory}')`);
     res.send({ created: 'article has been created' });
   } catch (e) {
-    throw new Error(e);
+    res.status(400).send({ msg: 'something wrong' });
   }
 };
 
@@ -51,8 +49,7 @@ const updateArticle = async (req, res) => {
       res.status(403).send({ message: `article id ${id} is not found` });
     }
   } catch (e) {
-    res.status(400);
-    throw new Error(e);
+    res.status(400).send({ msg: 'something wrong' });
   }
 };
 
@@ -66,7 +63,7 @@ const deleteArticle = async (req, res) => {
       res.send({ msg: `no article with id ${id}` });
     }
   } catch (e) {
-    throw new Error(e);
+    res.status(400).send({ msg: 'something wrong' });
   }
 };
 
