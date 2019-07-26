@@ -13,6 +13,7 @@ const db = new Client({
   database: dbname,
 });
 
+
 db.connect()
   .then(() => console.log('pg connected'))
   .catch(e => console.error('Connection failed...', e.stack));
