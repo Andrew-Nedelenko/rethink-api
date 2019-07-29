@@ -2,7 +2,7 @@ const { db } = require('../database/connect');
 
 const getArticles = async (req, res) => {
   try {
-    const { rows } = await db.query('SELECT * FROM articles ORDER BY articleid ASC');
+    const { rows } = await db.query('SELECT * FROM article ORDER BY id ASC');
     if (rows.length > 0) {
       res.send(rows);
     } else {
@@ -16,7 +16,7 @@ const getArticles = async (req, res) => {
 const getOneArticle = async (req, res) => {
   const { id } = req.params;
   try {
-    const { rows } = await db.query(`SELECT * FROM articles WHERE articleid = ${id}`);
+    const { rows } = await db.query(`SELECT * FROM article WHERE id = ${id}`);
     if (rows.length > 0) {
       res.send(rows);
     } else {
@@ -29,10 +29,12 @@ const getOneArticle = async (req, res) => {
 
 const addArticle = async (req, res) => {
   const { title, description, cathegory } = req.body;
+  console.log(req.body);
   try {
-    await db.query(`INSERT INTO articles (title, description, cathegory) VALUES ('${title}', '${description}', '${cathegory}')`);
+    await db.query(`INSERT INTO article (title, description, category) VALUES ('${title}', '${description}', '${cathegory}');`);
     res.send({ created: 'article has been created' });
   } catch (e) {
+    console.log(e);
     res.status(400).send({ msg: 'something wrong' });
   }
 };
@@ -42,7 +44,7 @@ const updateArticle = async (req, res) => {
     id, title, description, cathegory,
   } = req.body;
   try {
-    const probe = await db.query(`UPDATE articles SET title = '${title}', description = '${description}', cathegory = '${cathegory}' WHERE articleid = ${id}`);
+    const probe = await db.query(`UPDATE article SET title = '${title}', description = '${description}', category = '${cathegory}' WHERE id = ${id}`);
     if (probe.rowCount > 0) {
       res.status(200).send({ message: 'article updated!' });
     } else {
@@ -56,7 +58,7 @@ const updateArticle = async (req, res) => {
 const deleteArticle = async (req, res) => {
   const { id } = req.params;
   try {
-    const { rowCount } = await db.query(`DELETE FROM articles WHERE articleid = ${id}`);
+    const { rowCount } = await db.query(`DELETE FROM article WHERE id = ${id}`);
     if (rowCount > 0) {
       res.send({ msg: 'article delete succesfully' });
     } else {
