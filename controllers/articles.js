@@ -28,13 +28,12 @@ const getOneArticle = async (req, res) => {
 };
 
 const addArticle = async (req, res) => {
-  const { title, description, cathegory } = req.body;
+  const { title, description, category } = req.body;
   console.log(req.body);
   try {
-    await db.query(`INSERT INTO article (title, description, category) VALUES ('${title}', '${description}', '${cathegory}');`);
+    await db.query(`INSERT INTO article (title, description, category) VALUES ('${title}', '${description}', '${category}');`);
     res.send({ created: 'article has been created' });
   } catch (e) {
-    console.log(e);
     res.status(400).send({ msg: 'something wrong' });
   }
 };
