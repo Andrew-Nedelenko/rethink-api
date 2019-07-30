@@ -9,6 +9,7 @@ const {
   addArticle, updateArticle,
   deleteArticle,
 } = require('../controllers/articles');
+const { searchArticle } = require('../controllers/search');
 
 const router = Router();
 
@@ -22,6 +23,8 @@ router.get('/article/:id', getOneArticle);
 router.post('/addarticle', bodyParser.json(), addArticle);
 router.patch('/updatearticle', bodyParser.json(), updateArticle);
 router.delete('/deletearticle/:id', deleteArticle);
+
+router.post('/searcharticle', bodyParser.json(), searchArticle);
 
 
 module.exports = { router };
