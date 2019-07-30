@@ -2,7 +2,7 @@ const { db } = require('../database/connect');
 
 const getCategory = async (req, res) => {
   try {
-    const { rows } = await db.query('SELECT * FROM categories JOIN article ON category = category_name ORDER BY article.id;');
+    const { rows } = await db.query('SELECT * FROM categories ORDER BY id ASC;');
     res.status(200).send(rows);
   } catch (e) {
     res.status(400).send({ msg: 'something wrong' });

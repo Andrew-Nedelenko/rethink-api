@@ -6,7 +6,7 @@ const getArticles = async (req, res) => {
     if (rows.length > 0) {
       res.send(rows);
     } else {
-      res.send({ msg: 'no articles yet' });
+      res.status(204).send({ msg: 'no articles yet' });
     }
   } catch (e) {
     res.status(400).send({ msg: 'something wrong' });
@@ -29,9 +29,8 @@ const getOneArticle = async (req, res) => {
 
 const addArticle = async (req, res) => {
   const { title, description, category } = req.body;
-  console.log(req.body);
   try {
-    await db.query(`INSERT INTO article (title, description, category) VALUES ('${title}', '${description}', '${category}');`);
+    await db.query(`INSERT INTO article (title, description, category, created_at) VALUES ('${title}', '${description}', '${category}', 'now()');`);
     res.send({ created: 'article has been created' });
   } catch (e) {
     res.status(400).send({ msg: 'something wrong' });
@@ -43,7 +42,7 @@ const updateArticle = async (req, res) => {
     id, title, description, cathegory,
   } = req.body;
   try {
-    const probe = await db.query(`UPDATE article SET title = '${title}', description = '${description}', category = '${cathegory}' WHERE id = ${id}`);
+    const probe = await db.query(`UPDATE article SET title = '${title}', description = '${description}', category = '${cathegory}', updated_at = 'now()' WHERE id = ${id}`);
     if (probe.rowCount > 0) {
       res.status(200).send({ message: 'article updated!' });
     } else {
