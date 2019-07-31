@@ -13,7 +13,7 @@ const addCategory = async (req, res) => {
   const { cathegory } = req.body;
   try {
     await db.query(`INSERT INTO categories (category_name) VALUES ('${cathegory}')`);
-    res.status(200).send({ msg: `category ${cathegory} inserted` });
+    res.status(201).send({ msg: `category ${cathegory} inserted` });
   } catch (e) {
     res.status(400).send({ msg: 'something wrong' });
   }
@@ -24,7 +24,7 @@ const updateCategory = async (req, res) => {
   try {
     const probe = await db.query(`UPDATE categories SET category_name = '${cathegory}' WHERE id = ${id}`);
     if (probe.rowCount > 0) {
-      res.status(200).send({ message: `category ${cathegory} updated!` });
+      res.status(201).send({ message: `category ${cathegory} updated!` });
     } else {
       res.status(403).send({ message: `category id ${id} is not found` });
     }

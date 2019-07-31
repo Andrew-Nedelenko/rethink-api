@@ -31,7 +31,7 @@ const addArticle = async (req, res) => {
   const { title, description, category } = req.body;
   try {
     await db.query(`INSERT INTO article (title, description, category, created_at) VALUES ('${title}', '${description}', '${category}', 'now()');`);
-    res.send({ created: 'article has been created' });
+    res.status(201).send({ created: 'article has been created' });
   } catch (e) {
     res.status(400).send({ msg: 'something wrong' });
   }
@@ -44,7 +44,7 @@ const updateArticle = async (req, res) => {
   try {
     const probe = await db.query(`UPDATE article SET title = '${title}', description = '${description}', category = '${cathegory}', updated_at = 'now()' WHERE id = ${id}`);
     if (probe.rowCount > 0) {
-      res.status(200).send({ message: 'article updated!' });
+      res.status(201).send({ message: 'article updated!' });
     } else {
       res.status(403).send({ message: `article id ${id} is not found` });
     }
@@ -60,7 +60,7 @@ const deleteArticle = async (req, res) => {
     if (rowCount > 0) {
       res.send({ msg: 'article delete succesfully' });
     } else {
-      res.send({ msg: `no article with id ${id}` });
+      res.status(204).send({ msg: `no article with id ${id}` });
     }
   } catch (e) {
     res.status(400).send({ msg: 'something wrong' });
