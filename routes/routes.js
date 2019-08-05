@@ -19,7 +19,7 @@ router.patch('/updatecathegory', bodyParser.json(), updateCategory);
 router.delete('/deletecathegory/:id', deleteCategory);
 
 router.get('/articles', getArticles);
-router.get('/article/:id', getOneArticle);
+router.get('/article/:link', getOneArticle);
 router.post('/addarticle', bodyParser.json(), addArticle);
 router.patch('/updatearticle', bodyParser.json(), updateArticle);
 router.delete('/deletearticle/:id', deleteArticle);

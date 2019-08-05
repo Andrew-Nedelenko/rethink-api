@@ -14,13 +14,13 @@ const getArticles = async (req, res) => {
 };
 
 const getOneArticle = async (req, res) => {
-  const { id } = req.params;
+  const { link } = req.params;
   try {
-    const { rows } = await db.query(`SELECT * FROM article WHERE id = ${id}`);
+    const { rows } = await db.query(`SELECT * FROM article WHERE link = '${link}'`);
     if (rows.length > 0) {
       res.send(rows);
     } else {
-      res.status(400).send({ msg: `no article with id ${id}` });
+      res.status(400).send({ msg: `no article with title ${link}` });
     }
   } catch (e) {
     res.status(400).send({ msg: 'something wrong' });
@@ -29,8 +29,9 @@ const getOneArticle = async (req, res) => {
 
 const addArticle = async (req, res) => {
   const { title, description, category } = req.body;
+  const createLink = title.split(' ').join('-').toLowerCase();
   try {
-    await db.query(`INSERT INTO article (title, description, category, created_at) VALUES ('${title}', '${description}', '${category}', 'now()');`);
+    await db.query(`INSERT INTO article (title, description, link, category, created_at) VALUES ('${title}', '${description}', '${createLink}', '${category}', 'now()');`);
     res.status(201).send({ created: 'article has been created' });
   } catch (e) {
     res.status(400).send({ msg: 'something wrong' });
@@ -49,6 +50,7 @@ const updateArticle = async (req, res) => {
       res.status(403).send({ message: `article id ${id} is not found` });
     }
   } catch (e) {
+    console.log(e);
     res.status(400).send({ msg: 'something wrong' });
   }
 };
