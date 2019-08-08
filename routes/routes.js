@@ -1,8 +1,11 @@
 const { Router } = require('express');
 const bodyParser = require('body-parser');
 const {
-  getCategory, addCategory,
-  updateCategory, deleteCategory,
+  getCategory,
+  getCategoryById,
+  addCategory,
+  updateCategory,
+  deleteCategory,
 } = require('../controllers/cathegory');
 const {
   getArticles, getOneArticle,
@@ -14,6 +17,7 @@ const { searchArticle } = require('../controllers/search');
 const router = Router();
 
 router.get('/cathegory', getCategory);
+router.get('/category/:categoryname', getCategoryById);
 router.post('/addcathegory', bodyParser.json(), addCategory);
 router.patch('/updatecathegory', bodyParser.json(), updateCategory);
 router.delete('/deletecathegory/:id', deleteCategory);

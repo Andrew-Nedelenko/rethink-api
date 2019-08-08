@@ -9,6 +9,16 @@ const getCategory = async (req, res) => {
   }
 };
 
+const getCategoryById = async (req, res) => {
+  const { categoryname } = req.params;
+  try {
+    const { rows } = await db.query(`SELECT * FROM article WHERE category = '${categoryname}'`);
+    res.status(200).send(rows);
+  } catch (e) {
+    res.status(400).send({ msg: 'something went wrong' });
+  }
+};
+
 const addCategory = async (req, res) => {
   const { cathegory } = req.body;
   try {
@@ -52,5 +62,9 @@ const deleteCategory = async (req, res) => {
 };
 
 module.exports = {
-  getCategory, addCategory, updateCategory, deleteCategory,
+  getCategory,
+  addCategory,
+  updateCategory,
+  deleteCategory,
+  getCategoryById,
 };
