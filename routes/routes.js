@@ -30,5 +30,4 @@ router.delete('/deletearticle/:id', deleteArticle);
 
 router.post('/searcharticle', bodyParser.json(), searchArticle);
 
-
 module.exports = { router };
