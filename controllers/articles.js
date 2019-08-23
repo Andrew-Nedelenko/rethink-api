@@ -1,5 +1,4 @@
 const { db } = require('../database/connect');
-const { mysqlRealEscapeString } = require('../utils/escapestr');
 const { createLink } = require('../utils/createLink');
 
 const getArticles = async (req, res) => {
@@ -31,11 +30,11 @@ const getOneArticle = async (req, res) => {
 
 const addArticle = async (req, res) => {
   const { title, description, category } = req.body;
-  const realEscape = mysqlRealEscapeString(description);
   try {
-    await db.query(`INSERT INTO article (title, description, link, category, created_at) VALUES ('${title}', '${realEscape}', '${createLink(title)}', '${category}', 'now()');`);
+    await db.query(`INSERT INTO article (title, description, link, category, created_at) VALUES ('${title}', '${description}', '${createLink(title)}', '${category}', 'now()');`);
     res.status(201).send({ created: 'article has been created' });
   } catch (e) {
+    console.log(e);
     res.status(400).send({ msg: 'something wrong' });
   }
 };
