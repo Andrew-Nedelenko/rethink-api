@@ -34,7 +34,6 @@ const addArticle = async (req, res) => {
     await db.query(`INSERT INTO article (title, description, link, category, created_at) VALUES ('${title}', '${description}', '${createLink(title)}', '${category}', 'now()');`);
     res.status(201).send({ created: 'article has been created' });
   } catch (e) {
-    console.log(e);
     res.status(400).send({ msg: 'something wrong' });
   }
 };

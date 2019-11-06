@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const bodyParser = require('body-parser');
+
 const {
   getCategory,
   getCategoryById,
@@ -7,12 +8,18 @@ const {
   updateCategory,
   deleteCategory,
 } = require('../controllers/cathegory');
+
 const {
   getArticles, getOneArticle,
   addArticle, updateArticle,
   deleteArticle,
 } = require('../controllers/articles');
+
 const { searchArticle } = require('../controllers/search');
+
+const { loginMiddleware } = require('../middleware/login-md');
+const { authMiddleware } = require('../middleware/auth-md');
+const { userRegistrate } = require('../controllers/user-auth');
 
 const router = Router();
 
@@ -29,5 +36,8 @@ router.patch('/updatearticle', bodyParser.json(), updateArticle);
 router.delete('/deletearticle/:id', deleteArticle);
 
 router.post('/searcharticle', bodyParser.json(), searchArticle);
+
+router.post('/userauth', bodyParser.json(), authMiddleware, userRegistrate);
+router.post('/userlogin', bodyParser.json(), loginMiddleware);
 
 module.exports = { router };

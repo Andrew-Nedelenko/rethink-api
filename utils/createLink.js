@@ -5,6 +5,6 @@ function createLink(rawTitle) {
   return id.concat(rawTitle.replace(/[^a-zA-ZА-Яа-я0-9]/g, '-').replace(/-$/, '').toLowerCase());
 }
 
-console.log(createLink('Lorem Ipsum – Псевдо-Латинский Текст'));
+// console.log(createLink('Lorem Ipsum – Псевдо-Латинский Текст ?'));
 
 module.exports = { createLink };
