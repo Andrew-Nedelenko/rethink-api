@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "nodemon --exec ts-node src/index.ts",
     "start": "NODE_ENV=production node index.js"
   },
   "repository": {
@@ -19,18 +19,24 @@
   },
   "homepage": "https://github.com/Synacten/rethink-api#readme",
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.2.0",
-    "eslint-plugin-import": "^2.18.2",
-    "nodemon": "^1.19.4"
+    "@types/koa": "^2.11.3",
+    "@types/koa-helmet": "^5.2.0",
+    "@types/koa-router": "^7.4.1",
+    "@typescript-eslint/eslint-plugin": "^3.0.0",
+    "@typescript-eslint/parser": "^3.0.0",
+    "chalk": "^4.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.20.2",
+    "nodemon": "^1.19.4",
+    "ts-node": "^8.10.1",
+    "typescript": "^3.9.3"
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "morgan": "^1.9.1",
-    "pg": "^7.12.1",
-    "sql-injection": "0.0.6"
+    "koa": "^2.12.0",
+    "koa-helmet": "^5.2.0",
+    "koa-router": "^8.0.8"
   }
 }
