@@ -1,6 +1,7 @@
 import { app } from './App';
 import { env } from './config/Env';
 
+
 if (process.env.NODE_ENV === 'production') {
   app.listen(env('PORT'), () => global.console.log(`Server started on ${env('PORT')}`));
 } else {

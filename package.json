@@ -22,6 +22,7 @@
     "@types/koa": "^2.11.3",
     "@types/koa-helmet": "^5.2.0",
     "@types/koa-router": "^7.4.1",
+    "@types/mysql": "^2.15.12",
     "@typescript-eslint/eslint-plugin": "^3.0.0",
     "@typescript-eslint/parser": "^3.0.0",
     "chalk": "^4.0.0",
@@ -37,6 +38,7 @@
     "dotenv": "^8.2.0",
     "koa": "^2.12.0",
     "koa-helmet": "^5.2.0",
-    "koa-router": "^8.0.8"
+    "koa-router": "^8.0.8",
+    "mysql": "^2.18.1"
   }
 }
