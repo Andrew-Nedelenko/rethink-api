@@ -1,12 +1,9 @@
 import Router from 'koa-router';
-import { categoryRouter } from './category.routes';
+import { publicRouter } from './public/public.routes';
+import { privateRouter } from './private/private.routes';
 
-const router = new Router();
+const router = new Router({ prefix: '/api/v1' });
 
-router.get('/', async (ctx) => {
-  ctx.body = 'hello';
-});
-
-router.use(categoryRouter.routes());
+router.use(publicRouter.routes()).use(privateRouter.routes());
 
 export { router };

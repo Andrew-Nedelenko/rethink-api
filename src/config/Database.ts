@@ -22,9 +22,10 @@ class Database {
     promiseQuery <T>(query: string, args: Array<T>): Promise<T> {
       return new Promise((res, rej) => {
         const conn = this.connnection();
-        conn.query(query, args, (err, result) => {
+        conn.query(query, args, (err, result: T) => {
           if (!err) {
-            return res(result);
+            res(result);
+            return conn.end();
           }
           conn.end();
           return rej(err);
