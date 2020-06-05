@@ -6,3 +6,7 @@ export interface CategoryTypes {
 }
 
 export type CategoryInput = {categoryName: string}
+export type CategoryUpdateInput = {
+    categoryId: number;
+    categoryName: string;
+}
